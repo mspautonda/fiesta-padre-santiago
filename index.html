@@ -277,90 +277,62 @@
 
   function mostrarResultadoFinal(data) {
 
-    let mensaje = "";
+  let mensaje = "";
 
-    if (data.ok) {
+  if (data.ok) {
 
-      mensaje =
-        "✓ ENTRADA AUTORIZADA" +
-        "<div class='nombre'>" +
-        escaparHTML(data.nombre) +
-        "</div>" +
-        "<div class='personas'>" +
-        data.personasQueIngresaron +
-        " persona(s) ingresaron" +
-        "</div>" +
-        "<div class='folio'>Folio: " +
-        escaparHTML(data.folio) +
-        "</div>";
+    mensaje =
+      "✓ ENTRADA AUTORIZADA" +
+      "<div class='nombre'>" +
+      escaparHTML(data.nombre) +
+      "</div>" +
+      "<div class='folio'>Folio: " +
+      escaparHTML(data.folio) +
+      "</div>";
 
-      mostrarResultado(mensaje, "success");
+    mostrarResultado(mensaje, "success");
 
-    }
-
-    else if (data.tipo === "usado") {
-
-      mensaje =
-        "⚠️ ESTE PASE YA FUE UTILIZADO" +
-        "<div class='nombre'>" +
-        escaparHTML(data.nombre) +
-        "</div>" +
-        "<div class='personas'>" +
-        "Personas que ingresaron: " +
-        data.personasQueIngresaron +
-        "</div>" +
-        "<div class='folio'>" +
-        "Entrada registrada: " +
-        escaparHTML(data.horaEntrada || "") +
-        "</div>";
-
-      mostrarResultado(mensaje, "error");
-
-    }
-
-    else if (data.tipo === "no_confirmado") {
-
-      mensaje =
-        "⚠️ INVITACIÓN NO CONFIRMADA" +
-        "<div class='nombre'>" +
-        escaparHTML(data.nombre || "") +
-        "</div>";
-
-      mostrarResultado(mensaje, "warning");
-
-    }
-
-    else if (data.tipo === "exceso") {
-
-      mensaje =
-        "⚠️ CANTIDAD DE PERSONAS INVÁLIDA" +
-        "<div class='nombre'>" +
-        escaparHTML(data.nombre || "") +
-        "</div>" +
-        "<div class='personas'>" +
-        "Registradas: " +
-        data.personasAutorizadas +
-        "<br>" +
-        "Intentando ingresar: " +
-        data.personasQueIngresan +
-        "</div>";
-
-      mostrarResultado(mensaje, "warning");
-
-    }
-
-    else {
-
-      mostrarResultado(
-        "✕ FOLIO NO ENCONTRADO",
-        "error"
-      );
-
-    }
-
-    document.getElementById("siguiente").style.display = "block";
   }
 
+  else if (data.tipo === "usado") {
+
+    mensaje =
+      "⚠️ ESTE PASE YA FUE UTILIZADO" +
+      "<div class='nombre'>" +
+      escaparHTML(data.nombre) +
+      "</div>" +
+      "<div class='folio'>" +
+      "Entrada registrada: " +
+      escaparHTML(data.horaEntrada || "") +
+      "</div>";
+
+    mostrarResultado(mensaje, "error");
+
+  }
+
+  else if (data.tipo === "no_confirmado") {
+
+    mensaje =
+      "⚠️ INVITACIÓN NO CONFIRMADA" +
+      "<div class='nombre'>" +
+      escaparHTML(data.nombre || "") +
+      "</div>";
+
+    mostrarResultado(mensaje, "warning");
+
+  }
+
+  else {
+
+    mostrarResultado(
+      "✕ FOLIO NO ENCONTRADO",
+      "error"
+    );
+
+  }
+
+  document.getElementById("siguiente").style.display = "block";
+}
 
   function escaparHTML(texto) {
 
